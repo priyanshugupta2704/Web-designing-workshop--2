@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>students marks and grade calculator</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background : f2f2f2;
+        text-align: center;
+    }
+    .container {
+        width:300px;
+        height:300px;
+        background-color:white;
+        margin:0 auto ;
+        text-align: centre;
+    }
+    input {
+        width:60%;
+        padding:6px;
+        margin:5px;
+    }
+    button {
+        padding : 10px 15 px;
+        background-color: beige;
+        color: black;
+        border: 20px;
+        cursor:pointer;
+    }
+    .result{
+        margin-top: 30px;
+        font-size: 15px;
+        font-bold: bold;
+    }
+</style>
+<body>
+    <div class="container">
+        <h2>Students Marks and Grade Calculator</h2>
+        <input type="number" id="sub1" placeholder="enter sub1 marks "><br>
+        <input type="number" id="sub2" placeholder="enter sub2 marks"><br>
+        <input type="number" id="sub3" placeholder="enter sub3 marks"><br>
+        <input type="number" id="sub4" placeholder="enter sub4 marks"><br>
+        <button onclick="calculateGrade()">Calculate Grade</button>
+        <div class="result" id="result"></div>
+        <script>
+        function calculateResult() {
+            var sub1 = parseFloat(document.getElementById('sub1').value);
+            var sub2 = parseFloat(document.getElementById('sub2').value);
+            var sub3 = parseFloat(document.getElementById('sub3').value);
+            var sub4 = parseFloat(document.getElementById('sub4').value);
+
+            if (isNaN(sub1) || isNaN(sub2) || isNaN(sub3) || isNaN(sub4)) {
+                document.getElementById('result').innerText = "Please enter valid marks for all subjects.";
+                return;
+            }
+            var totalMarks = sub1 + sub2 + sub3 + sub4;
+            var percentage = (totalMarks / 400) * 100;
+            var grade;
+            
+            if (percentage >= 90) {
+                grade = 'A';
+            } else if (percentage >= 80) {
+                grade = 'B';
+            } else if (percentage >= 70) {
+                grade = 'C';
+            } else if (percentage >= 60) {
+                grade = 'D';
+            } else {
+                grade = 'F';
+            }
+
+            document.getElementById('result').innerText = "Total Marks: " + totalMarks + "\nPercentage: " + percentage.toFixed(2) + "%\nGrade: " + grade;
+        }
+    </script>
+    </div>
+</body>
+</html>
