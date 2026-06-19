@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Events Demo</title>
+<style>
+*{
+}
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, sans-serif;
+body{
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+.container{
+width:90%;
+max-width:900px;
+background:
+#f2f2f2;
+padding:40px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+border:5px solid 
+}
+h1{
+#00ffd5;
+margin-bottom:20px;
+font-size:40px;
+}
+input{
+padding:10px;
+width:300px;
+margin-bottom:20px;
+}
+.btn{
+padding:10px 15px;
+border:none;
+background:
+color:white;
+#0d6efd;
+border-radius:5px;
+cursor:pointer;
+margin:5px;
+}
+.btn:hover{
+background:
+#084fc7;
+}
+#paragraph{
+margin-top:30px;
+font-size:20px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1 id="heading">
+JavaScript is a scripting language used to make web pages interactive and 
+dynamic.
+</h1>
+<input type="text" id="textInput"
+value="JavaScript is a scripting language used to">
+<br>
+<button class="btn" onclick="changeHeading()">
+Change Heading
+</button>
+<button class="btn" onclick="changeBackground()">
+Change Background
+</button>
+<button class="btn" onclick="increaseFont()">
+Increase Font Size
+</button>
+<br>
+<button class="btn" onclick="toggleParagraph()">
+Show/Hide Paragraph
+</button>
+<button class="btn" onclick="resetPage()">
+Reset
+</button>
+<p id="paragraph">
+This is a sample paragraph. JavaScript events can dynamically change content.
+</p>
+</div>
+<script>
+let fontSize = 40;
+function changeHeading(){
+let text = document.getElementById("textInput").value;
+document.getElementById("heading").innerText = text;
+}
+function changeBackground(){
+const colors = [
+"
+#f8d7da",
+"#d1e7dd",
+"#f
+ff3cd",
+"#cfe2ff",
+"#e2d9f3"
+];
+let randomColor =
+colors[Math.floor(Math.random()*colors.length)];
+document.querySelector(".container").style.backgroundColor =
+randomColor;
+}
+function increaseFont(){
+fontSize += 5;
+document.getElementById("heading").style.fontSize =
+fontSize + "px";
+}
+function toggleParagraph(){
+let para = document.getElementById("paragraph");
+if(para.style.display === "none"){
+para.style.display = "block";
+}else{
+para.style.display = "none";
+}
+}
+function resetPage(){
+location.reload();
+}
+</script>
+</body>
+</html>
