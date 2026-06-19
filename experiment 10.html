@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management System</title>
+    </head>
+    <style>
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:450px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+h1{
+    text-align:center;
+    color:white;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.result{
+    margin-top:20px;
+    background:#f4f4f4;
+    padding:15px;
+    border-radius:10px;
+}
+
+.result p{
+    margin:8px 0;
+}
+</style>
+<body>
+
+    <div class="container">
+        <h1>🏦 Bank Management System</h1>
+
+        <div class="card">
+            <label>Account Number</label>
+            <input type="text" id="accountNo" value="2500221125">
+
+            <label>Account Holder Name</label>
+            <input type="text" id="holderName" value="Rahul Sharma">
+
+            <label>Current Balance (₹)</label>
+            <input type="number" id="balance" value="10000">
+
+            <label>Deposit Amount (₹)</label>
+            <input type="number" id="depositAmount">
+
+            <button onclick="depositMoney()">Deposit</button>
+
+            <div class="result">
+                <h3>Account Details</h3>
+                <p><strong>Account Number:</strong> <span id="accDisplay">2500221125</span></p>
+                <p><strong>Account Holder:</strong> <span id="nameDisplay">Rahul Sharma</span></p>
+                <p><strong>Balance:</strong> ₹<span id="balanceDisplay">10000</span></p>
+                <p><strong>Interest (5%):</strong> ₹<span id="interestDisplay">500</span></p>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+// Abstract Class
+abstract class BankAccount {
+
+    // Private data members
+    private String accountNumber;
+    private String accountHolderName;
+    private double balance;
+
+    // Constructor
+    public BankAccount(String accountNumber,
+                       String accountHolderName,
+                       double balance) {
+
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = balance;
+    }
+
+    // Getter Methods
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    // Setter Method
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    // Deposit Method
+    public void deposit(double amount) {
+
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("₹" + amount + " deposited successfully.");
+        } else {
+            System.out.println("Invalid amount.");
+        }
+    }
+
+    // Display Method
+    public void displayDetails() {
+
+        System.out.println("Account Number : " + accountNumber);
+        System.out.println("Account Holder : " + accountHolderName);
+        System.out.println("Balance        : ₹" + balance);
+    }
+
+    // Abstract Method
+    abstract double calculateInterest();
+}
+
+// Savings Account Class
+class SavingsAccount extends BankAccount {
+
+    private double interestRate = 5.0;
+
+    public SavingsAccount(String accountNumber,
+                          String accountHolderName,
+                          double balance) {
+
+        super(accountNumber, accountHolderName, balance);
+    }
+
+    @Override
+    double calculateInterest() {
+        return (getBalance() * interestRate) / 100;
+    }
+}
+
+// Current Account Class
+class CurrentAccount extends BankAccount {
+
+    private double interestRate = 2.0;
+
+    public CurrentAccount(String accountNumber,
+                          String accountHolderName,
+                          double balance) {
+
+        super(accountNumber, accountHolderName, balance);
+    }
+
+    @Override
+    double calculateInterest() {
+        return (getBalance() * interestRate) / 100;
+    }
+}
+
+// Main Class
+public class BankManagementSystem {
+
+    public static void main(String[] args) {
+
+        // Creating Savings Account Object
+        SavingsAccount sa = new SavingsAccount(
+                "2500221125",
+                "Rahul Sharma",
+                10000
+        );
+
+        // Deposit money
+        sa.deposit(5000);
+
+        // Display details
+        System.out.println("\n===== Savings Account =====");
+        sa.displayDetails();
+
+        // Interest
+        System.out.println("Interest : ₹" + sa.calculateInterest());
+
+        // Creating Current Account Object
+        CurrentAccount ca = new CurrentAccount(
+                "2500221126",
+                "Ajay Verma",
+                200000
+        );
+
+        // Deposit money
+        ca.deposit(3000);
+
+        // Display details
+        System.out.println("\n===== Current Account =====");
+        ca.displayDetails();
+
+        // Interest
+        System.out.println("Interest : ₹" + ca.calculateInterest());
+    }
+}
+</script>
+</html>
